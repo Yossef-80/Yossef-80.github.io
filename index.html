@@ -4,166 +4,192 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youssef Muhammed | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #0b0f19;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.05);
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-muted: #64748b;
+            --text-body: #94a3b8;
             --ai-color: #3b82f6;
+            --ai-glow: rgba(59, 130, 246, 0.15);
             --data-color: #10b981;
-            --border-color: #334155;
+            --data-glow: rgba(16, 185, 129, 0.15);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
             color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 60px;
+            line-height: 1.7;
+            padding-bottom: 80px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 24px;
         }
 
         /* Header Section */
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            animation: slideDown 0.8s var(--ease-smooth);
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #3b82f6, #10b981);
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         header p {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            color: var(--text-body);
+            font-size: 1.15rem;
+            margin-bottom: 24px;
+            font-weight: 400;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .social-links a {
-            color: var(--text-main);
-            font-size: 1.5rem;
-            transition: color 0.3s;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            transition: color 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
             text-decoration: none;
         }
 
-        .social-links a:hover { color: var(--ai-color); }
+        .social-links a:hover {
+            color: var(--text-main);
+            transform: translateY(-3px);
+        }
 
-        /* Navigation Tabs */
+        /* Modern Navigation Tabs */
         .tabs-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 50px;
+            position: relative;
+            gap: 10px;
         }
 
         .tab-btn {
-            background: none;
+            background: transparent;
             border: none;
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            padding: 15px 30px;
+            padding: 14px 28px;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+            transition: color 0.3s var(--ease-smooth);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .tab-btn:hover { color: var(--text-main); }
-
-        .tab-btn.active[data-tab="ai"] { color: var(--ai-color); }
-        .tab-btn.active[data-tab="ai"]::after {
-            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--ai-color);
+        .tab-btn:hover {
+            color: var(--text-main);
         }
 
-        .tab-btn.active[data-tab="data"] { color: var(--data-color); }
-        .tab-btn.active[data-tab="data"]::after {
-            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--data-color);
+        .tab-btn.active[data-tab="ai"] { color: var(--ai-color); background: var(--ai-glow); }
+        .tab-btn.active[data-tab="data"] { color: var(--data-color); background: var(--data-glow); }
+
+        .tab-content { display: none; opacity: 0; transform: translateY(15px); }
+        .tab-content.active { 
+            display: block; 
+            animation: tabReveal 0.6s var(--ease-smooth) forwards;
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes tabReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            gap: 12px;
+            color: var(--text-main);
         }
 
-        /* Grid Layouts */
+        /* Grid Layouts & Cards */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 25px;
-            transition: transform 0.3s, border-color 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
             display: flex;
             flex-direction: column;
         }
 
-        .card:hover { transform: translateY(-5px); }
-        .ai .card:hover { border-color: var(--ai-color); }
-        .data .card:hover { border-color: var(--data-color); }
+        .card:hover {
+            transform: translateY(-6px);
+        }
 
-        .card h3 { font-size: 1.3rem; margin-bottom: 5px; }
-        .card .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        .card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 15px; flex-grow: 1; }
+        .ai .card:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08); }
+        .data .card:hover { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 12px 30px rgba(16, 185, 129, 0.08); }
 
-        /* --- Image Slider System --- */
+        .card h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; }
+        .card .subtitle { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .card p { color: var(--text-body); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; line-height: 1.6; }
+
+        /* --- Engineered Premium Image Slider --- */
         .slider-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #334155;
-            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--card-border);
+            aspect-ratio: 16 / 10;
         }
 
         .slider-wrapper {
             display: flex;
-            transition: transform 0.4s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
             height: 100%;
         }
@@ -173,46 +199,79 @@
             height: 100%;
             object-fit: cover;
             flex-shrink: 0;
+            background-color: #161e2e;
         }
 
         .slider-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             color: #fff;
-            border: none;
-            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            width: 36px;
+            height: 36px;
             cursor: pointer;
             border-radius: 50%;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.3s var(--ease-smooth);
             z-index: 10;
+            opacity: 0;
         }
 
-        .slider-btn:hover { background-color: var(--ai-color); }
-        .data .slider-btn:hover { background-color: var(--data-color); }
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
+        .slider-container:hover .slider-btn { opacity: 1; }
+        .slider-btn:hover { background: var(--text-main); color: var(--bg-color); transform: translateY(-50%) scale(1.05); }
+        
+        .prev-btn { left: 12px; }
+        .next-btn { right: 12px; }
 
-        /* Badges */
-        .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .badge { font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; background-color: #334155; color: #e2e8f0; }
+        /* Slider Navigation Dots */
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s var(--ease-smooth);
+        }
+        .dot.active {
+            width: 18px;
+            border-radius: 3px;
+            background: #fff;
+        }
 
-        /* Timeline */
-        .timeline { margin-bottom: 50px; }
-        .timeline-item { background-color: var(--card-bg); border-left: 4px solid var(--border-color); padding: 20px; margin-bottom: 20px; border-radius: 0 12px 12px 0; }
-        .ai .timeline-item { border-left-color: var(--ai-color); }
-        .data .timeline-item { border-left-color: var(--data-color); }
-        .timeline-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
-        .time-period { color: var(--text-muted); font-size: 0.9rem; }
-        .timeline-item ul { margin-left: 20px; color: #cbd5e1; font-size: 0.95rem; }
-        .timeline-item li { margin-bottom: 5px; }
+        /* Minimalist Badges */
+        .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+        .badge { font-size: 0.78rem; font-weight: 500; padding: 5px 12px; border-radius: 8px; background: rgba(51, 65, 85, 0.3); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.03); }
 
-        footer { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 40px; }
+        /* Clean Timeline UX */
+        .timeline { margin-bottom: 60px; display: flex; flex-direction: column; gap: 24px; }
+        .timeline-item { background: var(--card-bg); border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; transition: border-color 0.3s; }
+        .timeline-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 16px; gap: 10px; }
+        .time-period { background: rgba(51, 65, 85, 0.4); padding: 4px 12px; border-radius: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 500; }
+        .timeline-item ul { margin-left: 18px; color: var(--text-body); font-size: 0.95rem; }
+        .timeline-item li { margin-bottom: 8px; line-height: 1.6; }
+        .timeline-item li::marker { color: var(--text-muted); }
+
+        footer { text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: 60px; border-top: 1px solid var(--card-border); padding-top: 30px; }
+        
         @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .timeline-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+            header h1 { font-size: 2.5rem; }
+            .timeline-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .time-period { align-self: flex-start; }
         }
     </style>
 </head>
@@ -237,7 +296,7 @@
         </div>
 
         <div id="ai" class="tab-content active ai">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <h2 class="section-title"><i class="fas fa-briefcase" style="color: var(--ai-color)"></i> Experience</h2>
             <div class="timeline">
                 
                 <div class="timeline-item">
@@ -245,15 +304,22 @@
                         <h3>Automation Specialist <span style="color: var(--ai-color)">@ Gear Master</span></h3>
                         <span class="time-period">Jul 2025 - Present</span>
                     </div>
-                    <p style="font-size:0.95rem; margin-bottom:10px; color:var(--text-muted);">Featured Implementation: <b>GearMaster Pro ERP - RBAC System</b></p>
+                    <p style="font-size:0.9rem; font-weight:600; margin-bottom:14px; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                        <i class="fas fa-layer-group" style="color:var(--ai-color)"></i> Featured Production: GearMaster Pro ERP - RBAC System
+                    </p>
                     
-                    <div class="slider-container" style="max-width: 600px; margin-bottom:15px;">
-                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
-                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                    <div class="slider-container" style="max-width: 640px; margin-bottom:20px;">
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)"><i class="fas fa-chevron-right"></i></button>
                         <div class="slider-wrapper">
-                            <img src="rbac1.png" alt="RBAC System Screenshot 1">
-                            <img src="rbac2.png" alt="RBAC System Screenshot 2">
-                            <img src="rbac3.png" alt="RBAC System Screenshot 3">
+                            <img src="rbac1.png" alt="RBAC Dashboard Mockup">
+                            <img src="rbac2.png" alt="RBAC Management Interface">
+                            <img src="rbac3.png" alt="RBAC Permissions Matrix">
+                        </div>
+                        <div class="slider-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
 
@@ -276,29 +342,29 @@
                 </div>
             </div>
 
-            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
+            <h2 class="section-title"><i class="fas fa-project-diagram" style="color: var(--ai-color)"></i> Highlighted Projects</h2>
             <div class="grid">
                 
                 <div class="card">
                     <h3>Students Attentiveness AI System</h3>
-                    <span class="subtitle">Python & YOLOv8 (Bitline AI)</span>
+                    <span class="subtitle">Python & YOLOv8</span>
                     
-                    <div style="background-color: #0f172a; padding: 15px; border-radius: 8px; border: 1px dashed var(--ai-color); margin-bottom: 15px; text-align: center;">
-                        <p style="font-size: 0.85rem; color: var(--ai-color); margin-bottom: 8px; font-weight: 600;">
-                            <i class="fas fa-lock"></i> System Architecture (Confidential Production)
+                    <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 12px; border: 1px dashed rgba(59, 130, 246, 0.2); margin-bottom: 20px;">
+                        <p style="font-size: 0.8rem; color: var(--ai-color); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.02em;">
+                            <i class="fas fa-lock"></i> SYSTEM PIPELINE (CONFIDENTIAL DATA)
                         </p>
-                        <div style="display: flex; justify-content: space-around; align-items: center; font-size: 0.72rem; color: var(--text-main); flex-wrap: wrap; gap: 5px;">
-                            <span style="background: #334155; padding: 4px 8px; border-radius: 4px;">Live Video Feed</span>
-                            <i class="fas fa-arrow-right" style="color: var(--text-muted)"></i>
-                            <span style="background: #1e3a8a; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--ai-color);">YOLOv8 Inference</span>
-                            <i class="fas fa-arrow-right" style="color: var(--text-muted)"></i>
-                            <span style="background: #334155; padding: 4px 8px; border-radius: 4px;">Analytics UI</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: #cbd5e1; gap: 4px;">
+                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Video Feed</span>
+                            <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 0.6rem;"></i>
+                            <span style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 5px 8px; border-radius: 6px; color: var(--ai-color);">YOLOv8</span>
+                            <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 0.6rem;"></i>
+                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Analytics API</span>
                         </div>
                     </div>
 
                     <p>Deployed a computer vision model to assess student engagement in real time, detecting confusion patterns from video data to provide instant instructor analytics.</p>
                     <div class="badges">
-                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Real-time Inference</span>
+                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Inference</span>
                     </div>
                 </div>
 
@@ -310,6 +376,7 @@
                         <span class="badge">FastAPI</span><span class="badge">OpenAI API</span><span class="badge">React</span>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Stroke Risk Predictor</h3>
                     <span class="subtitle">Python & Scikit-Learn</span>
@@ -319,23 +386,10 @@
                     </div>
                 </div>
             </div>
-
-            <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
-            <div class="card">
-                <div class="badges">
-                    <span class="badge" style="background-color: var(--ai-color)">Python</span>
-                    <span class="badge" style="background-color: var(--ai-color)">Scikit-learn</span>
-                    <span class="badge" style="background-color: var(--ai-color)">YOLO</span>
-                    <span class="badge" style="background-color: var(--ai-color)">FastAPI</span>
-                    <span class="badge" style="background-color: var(--ai-color)">OpenAI API</span>
-                    <span class="badge" style="background-color: var(--ai-color)">Docker</span>
-                    <span class="badge" style="background-color: var(--ai-color)">Git</span>
-                </div>
-            </div>
         </div>
 
         <div id="data" class="tab-content data">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <h2 class="section-title"><i class="fas fa-briefcase" style="color: var(--data-color)"></i> Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-header">
@@ -349,7 +403,7 @@
                 </div>
             </div>
 
-            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
+            <h2 class="section-title"><i class="fas fa-project-diagram" style="color: var(--data-color)"></i> Highlighted Projects</h2>
             <div class="grid">
                 
                 <div class="card">
@@ -357,18 +411,23 @@
                     <span class="subtitle">Power BI & Excel</span>
                     
                     <div class="slider-container">
-                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
-                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)"><i class="fas fa-chevron-right"></i></button>
                         <div class="slider-wrapper">
-                            <img src="olist1.png" alt="Olist Part 1">
-                            <img src="olist2.png" alt="Olist Part 2">
-                            <img src="olist3.png" alt="Olist Part 3">
+                            <img src="olist1.png" alt="Olist E-commerce Analytics View">
+                            <img src="olist2.png" alt="Olist Geographical Performance">
+                            <img src="olist3.png" alt="Olist Shipping Logistics Matrix">
+                        </div>
+                        <div class="slider-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
 
                     <p>Analyzed a Brazilian dataset covering 112K+ orders and $12.5M+ revenue. Developed map visuals to track delivery performance and delay rates.</p>
                     <div class="badges">
-                        <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Data Visualization</span>
+                        <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Data Modeling</span>
                     </div>
                 </div>
 
@@ -377,12 +436,17 @@
                     <span class="subtitle">Power BI & Meta Ads</span>
                     
                     <div class="slider-container">
-                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
-                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)"><i class="fas fa-chevron-right"></i></button>
                         <div class="slider-wrapper">
-                            <img src="gear1.png" alt="Gear Master Part 1">
-                            <img src="gear2.png" alt="Gear Master Part 2">
-                            <img src="gear3.png" alt="Gear Master Part 3">
+                            <img src="gear1.png" alt="Meta Campaigns Overview">
+                            <img src="gear2.png" alt="Regional Cost Efficiency Dashboard">
+                            <img src="gear3.png" alt="Funnel Performance Metrics">
+                        </div>
+                        <div class="slider-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
 
@@ -401,25 +465,15 @@
                     </div>
                 </div>
             </div>
-
-            <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
-            <div class="card">
-                <div class="badges">
-                    <span class="badge" style="background-color: var(--data-color)">Power BI (DAX, Power Query)</span>
-                    <span class="badge" style="background-color: var(--data-color)">SQL (MS SQL Server, Azure)</span>
-                    <span class="badge" style="background-color: var(--data-color)">Python (Pandas, NumPy)</span>
-                    <span class="badge" style="background-color: var(--data-color)">R Language</span>
-                </div>
-            </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 Youssef Muhammed. Built with ❤️ via GitHub Pages.</p>
+            <p>&copy; 2026 Youssef Muhammed. Fabricated with precision via GitHub Pages.</p>
         </footer>
     </div>
 
     <script>
-        // Tab Handling
+        // Smooth State-Driven Tabs
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -427,17 +481,21 @@
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
+                
                 button.classList.add('active');
                 const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+                const targetContent = document.getElementById(tabId);
+                
+                targetContent.classList.add('active');
             });
         });
 
-        // Image Slider Handling
+        // Precision Slider Engine with Dots Support
         function moveSlider(button, direction) {
             const container = button.parentElement;
             const wrapper = container.querySelector('.slider-wrapper');
             const images = wrapper.querySelectorAll('img');
+            const dots = container.querySelectorAll('.dot');
             const imgCount = images.length;
             
             let currentIndex = parseInt(container.getAttribute('data-index')) || 0;
@@ -448,6 +506,12 @@
             
             container.setAttribute('data-index', currentIndex);
             wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Sync UI Dots Indicators
+            if(dots.length > 0) {
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentIndex].classList.add('active');
+            }
         }
     </script>
 </body>
