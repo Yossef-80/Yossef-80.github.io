@@ -72,9 +72,7 @@
             text-decoration: none;
         }
 
-        .social-links a:hover {
-            color: var(--ai-color);
-        }
+        .social-links a:hover { color: var(--ai-color); }
 
         /* Navigation Tabs */
         .tabs-container {
@@ -96,9 +94,7 @@
             position: relative;
         }
 
-        .tab-btn:hover {
-            color: var(--text-main);
-        }
+        .tab-btn:hover { color: var(--text-main); }
 
         .tab-btn.active[data-tab="ai"] { color: var(--ai-color); }
         .tab-btn.active[data-tab="ai"]::after {
@@ -243,6 +239,30 @@
         <div id="ai" class="tab-content active ai">
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
             <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Automation Specialist <span style="color: var(--ai-color)">@ Gear Master</span></h3>
+                        <span class="time-period">Jul 2025 - Present</span>
+                    </div>
+                    <p style="font-size:0.95rem; margin-bottom:10px; color:var(--text-muted);">Featured Implementation: <b>GearMaster Pro ERP - RBAC System</b></p>
+                    
+                    <div class="slider-container" style="max-width: 600px; margin-bottom:15px;">
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                        <div class="slider-wrapper">
+                            <img src="rbac1.png" alt="RBAC System Screenshot 1">
+                            <img src="rbac2.png" alt="RBAC System Screenshot 2">
+                            <img src="rbac3.png" alt="RBAC System Screenshot 3">
+                        </div>
+                    </div>
+
+                    <ul>
+                        <li>Architected GearMaster Pro ERP (React/Node.js) with a secure Role-Based Access Control (RBAC) and secure API workflows, digitizing workshop operations safely.</li>
+                        <li>Engineered automated ETL pipelines and Node-based Telegram bots, reducing manual data processing by 40%.</li>
+                    </ul>
+                </div>
+
                 <div class="timeline-item">
                     <div class="timeline-header">
                         <h3>Part-time AI Developer <span style="color: var(--ai-color)">@ Bitline AI</span></h3>
@@ -254,28 +274,34 @@
                         <li>Optimized parallel inference pipelines, reducing response latency by 35% while maintaining >90% accuracy.</li>
                     </ul>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3>Automation Specialist <span style="color: var(--ai-color)">@ Gear Master</span></h3>
-                        <span class="time-period">Jul 2025 - Present</span>
-                    </div>
-                    <ul>
-                        <li>Architected GearMaster Pro ERP (React/Node.js) with RBAC and secure API workflows, digitizing automotive operations.</li>
-                        <li>Engineered automated ETL pipelines and Node-based Telegram bots, reducing manual data processing by 40%.</li>
-                    </ul>
-                </div>
             </div>
 
             <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
             <div class="grid">
+                
                 <div class="card">
-                    <h3>Students Attentiveness App</h3>
-                    <span class="subtitle">Python & YOLOv8</span>
-                    <p>Deployed a computer vision model to assess student engagement in real time, detecting confusion patterns to support adaptive teaching.</p>
+                    <h3>Students Attentiveness AI System</h3>
+                    <span class="subtitle">Python & YOLOv8 (Bitline AI)</span>
+                    
+                    <div style="background-color: #0f172a; padding: 15px; border-radius: 8px; border: 1px dashed var(--ai-color); margin-bottom: 15px; text-align: center;">
+                        <p style="font-size: 0.85rem; color: var(--ai-color); margin-bottom: 8px; font-weight: 600;">
+                            <i class="fas fa-lock"></i> System Architecture (Confidential Production)
+                        </p>
+                        <div style="display: flex; justify-content: space-around; align-items: center; font-size: 0.72rem; color: var(--text-main); flex-wrap: wrap; gap: 5px;">
+                            <span style="background: #334155; padding: 4px 8px; border-radius: 4px;">Live Video Feed</span>
+                            <i class="fas fa-arrow-right" style="color: var(--text-muted)"></i>
+                            <span style="background: #1e3a8a; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--ai-color);">YOLOv8 Inference</span>
+                            <i class="fas fa-arrow-right" style="color: var(--text-muted)"></i>
+                            <span style="background: #334155; padding: 4px 8px; border-radius: 4px;">Analytics UI</span>
+                        </div>
+                    </div>
+
+                    <p>Deployed a computer vision model to assess student engagement in real time, detecting confusion patterns from video data to provide instant instructor analytics.</p>
                     <div class="badges">
-                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Python</span>
+                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Real-time Inference</span>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Interactive Avatar Web App</h3>
                     <span class="subtitle">FastAPI & OpenAI API</span>
@@ -289,7 +315,7 @@
                     <span class="subtitle">Python & Scikit-Learn</span>
                     <p>Built a classification model to predict stroke risks. Handled high class imbalance using SMOTE techniques to improve minority-class recall.</p>
                     <div class="badges">
-                        <span class="badge">Machine Learning</span><span class="badge">Scikit-Learn</span><span class="badge">SMOTE</span>
+                        <span class="badge">Machine Learning</span><span class="badge">Scikit-Learn</span>
                     </div>
                 </div>
             </div>
@@ -414,12 +440,9 @@
             const images = wrapper.querySelectorAll('img');
             const imgCount = images.length;
             
-            // Get current active index or set to 0
             let currentIndex = parseInt(container.getAttribute('data-index')) || 0;
-            
             currentIndex += direction;
             
-            // Loop controls
             if (currentIndex >= imgCount) currentIndex = 0;
             if (currentIndex < 0) currentIndex = imgCount - 1;
             
