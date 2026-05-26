@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youssef Muhammed | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --ai-color: #3b82f6;
+            --data-color: #10b981;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--ai-color);
+        }
+
+        /* Navigation Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        .tab-btn.active[data-tab="ai"] {
+            color: var(--ai-color);
+        }
+        .tab-btn.active[data-tab="ai"]::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--ai-color);
+        }
+
+        .tab-btn.active[data-tab="data"] {
+            color: var(--data-color);
+        }
+        .tab-btn.active[data-tab="data"]::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--data-color);
+        }
+
+        /* Tab Content Visualization */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai .card:hover { border-color: var(--ai-color); }
+        .data .card:hover { border-color: var(--data-color); }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .card .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* Badges / Skills */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+
+        /* Timeline/Experience for Professional look */
+        .timeline {
+            margin-bottom: 50px;
+        }
+
+        .timeline-item {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .ai .timeline-item { border-left-color: var(--ai-color); }
+        .data .timeline-item { border-left-color: var(--data-color); }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .timeline-header h3 { font-size: 1.25rem; }
+        .time-period { color: var(--text-muted); font-size: 0.9rem; }
+
+        .timeline-item ul {
+            margin-left: 20px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item li { margin-bottom: 5px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .timeline-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Youssef Muhammed</h1>
+            <p>B.Sc. in Computer Science | Ain Shams University (GPA: 3.42)</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/youssef-mohammed-b2a48a1b4" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Yossef-80" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:yousef.mohammed.mdboly@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://youtube.com/channel/UCRNRKsGgn-ok5iuNs3ljbMA" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.behance.net/yossefmohammed1" target="_blank"><i class="fab fa-behance"></i></a>
+            </div>
+        </header>
+
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="ai"><i class="fas fa-brain"></i> AI Engineering</button>
+            <button class="tab-btn" data-tab="data"><i class="fas fa-chart-bar"></i> Data Analysis</button>
+        </div>
+
+        <div id="ai" class="tab-content active ai">
+            
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Part-time AI Developer <span style="color: var(--ai-color)">@ Bitline AI</span></h3>
+                        <span class="time-period">Nov 2024 - Present</span>
+                    </div>
+                    <ul>
+                        <li>Built a real-time Student Attentiveness AI System using YOLOv8, processing live video feeds for engagement analytics.</li>
+                        <li>Developed an Interactive Avatar Web App (React + OpenAI Real-time API + FastAPI) for low-latency voice-to-voice AI.</li>
+                        <li>Optimized parallel inference pipelines, reducing response latency by 35% while maintaining >90% accuracy.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Automation Specialist <span style="color: var(--ai-color)">@ Gear Master</span></h3>
+                        <span class="time-period">Jul 2025 - Present</span>
+                    </div>
+                    <ul>
+                        <li>Architected GearMaster Pro ERP (React/Node.js) with RBAC and secure API workflows, digitizing automotive operations.</li>
+                        <li>Engineered automated ETL pipelines and Node-based Telegram bots, reducing manual data processing by 40%.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Students Attentiveness App</h3>
+                    <span class="subtitle">Python & YOLOv8</span>
+                    <p>Deployed a computer vision model to assess student engagement in real time, detecting confusion patterns to support adaptive teaching.</p>
+                    <div class="badges">
+                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Python</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Interactive Avatar Web App</h3>
+                    <span class="subtitle">FastAPI & OpenAI API</span>
+                    <p>Developed a low-latency voice-to-voice web application integrating OpenAI's Real-time APIs with a React frontend web system.</p>
+                    <div class="badges">
+                        <span class="badge">FastAPI</span><span class="badge">OpenAI API</span><span class="badge">React</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Stroke Risk Predictor</h3>
+                    <span class="subtitle">Python & Scikit-Learn</span>
+                    <p>Built a classification model to predict stroke risks. Handled high class imbalance using SMOTE techniques to improve minority-class recall.</p>
+                    <div class="badges">
+                        <span class="badge">Machine Learning</span><span class="badge">Scikit-Learn</span><span class="badge">SMOTE</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+            <div class="card">
+                <div class="badges">
+                    <span class="badge" style="background-color: var(--ai-color)">Python</span>
+                    <span class="badge" style="background-color: var(--ai-color)">Scikit-learn</span>
+                    <span class="badge" style="background-color: var(--ai-color)">YOLO</span>
+                    <span class="badge" style="background-color: var(--ai-color)">FastAPI</span>
+                    <span class="badge" style="background-color: var(--ai-color)">OpenAI API</span>
+                    <span class="badge" style="background-color: var(--ai-color)">Docker</span>
+                    <span class="badge" style="background-color: var(--ai-color)">Git</span>
+                    <span class="badge" style="background-color: var(--ai-color)">NLP</span>
+                    <span class="badge" style="background-color: var(--ai-color)">Real-time Inference</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="data" class="tab-content data">
+            
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Data Analyst <span style="color: var(--data-color)">@ Gear Master</span></h3>
+                        <span class="time-period">Jul 2025 - Present</span>
+                    </div>
+                    <ul>
+                        <li><b>Marketing Analytics:</b> Built Meta campaign performance dashboards in Power BI to analyze EGP 52K+ ad spend and track 7.2K+ contacts.</li>
+                        <li><b>Cost & Region Analysis:</b> Analyzed key metrics (CTR, CPM, CPC) across Egyptian regions to optimize ad performance.</li>
+                        <li><b>Data Schema Design:</b> Participated in designing the data schema for the GearMaster Pro ERP system to ensure clean tracking.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Part-time AI Developer / Analyst <span style="color: var(--data-color)">@ Bitline AI</span></h3>
+                        <span class="time-period">Nov 2024 - Present</span>
+                    </div>
+                    <ul>
+                        <li>Processed video metadata outputs and transformed raw attentiveness scores into functional instructor analytics dashboards.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Olist E-Commerce Dashboard</h3>
+                    <span class="subtitle">Power BI & Excel</span>
+                    <p>Analyzed a Brazilian dataset covering 112K+ orders and $12.5M+ revenue. Developed map visuals to track delivery performance and delay rates.</p>
+                    <div class="badges">
+                        <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Customer Segmentation</h3>
+                    <span class="subtitle">R Language</span>
+                    <p>Applied K-means clustering algorithm in R to segment customers into actionable groups based on purchasing behaviors for marketing targeting.</p>
+                    <div class="badges">
+                        <span class="badge">R</span><span class="badge">K-Means</span><span class="badge">Cluster Analysis</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Churn Predictor App</h3>
+                    <span class="subtitle">Python & ML</span>
+                    <p>Developed a GUI-based machine learning application to forecast subscription churn patterns, helping retention teams save at-risk customers.</p>
+                    <div class="badges">
+                        <span class="badge">Python</span><span class="badge">Predictive Analytics</span><span class="badge">Tkinter</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+            <div class="card">
+                <div class="badges">
+                    <span class="badge" style="background-color: var(--data-color)">Power BI (DAX, Power Query)</span>
+                    <span class="badge" style="background-color: var(--data-color)">SQL (MS SQL Server, Azure)</span>
+                    <span class="badge" style="background-color: var(--data-color)">Python (Pandas, NumPy)</span>
+                    <span class="badge" style="background-color: var(--data-color)">R Language</span>
+                    <span class="badge" style="background-color: var(--data-color)">ETL / SSIS</span>
+                    <span class="badge" style="background-color: var(--data-color)">Excel</span>
+                    <span class="badge" style="background-color: var(--data-color)">Data Modeling</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Youssef Muhammed. Built with ❤️ via GitHub Pages.</p>
+        </footer>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
