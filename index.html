@@ -100,48 +100,24 @@
             color: var(--text-main);
         }
 
-        .tab-btn.active[data-tab="ai"] {
-            color: var(--ai-color);
-        }
+        .tab-btn.active[data-tab="ai"] { color: var(--ai-color); }
         .tab-btn.active[data-tab="ai"]::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--ai-color);
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--ai-color);
         }
 
-        .tab-btn.active[data-tab="data"] {
-            color: var(--data-color);
-        }
+        .tab-btn.active[data-tab="data"] { color: var(--data-color); }
         .tab-btn.active[data-tab="data"]::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--data-color);
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--data-color);
         }
 
-        /* Tab Content Visualization */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Section Headings */
         .section-title {
             font-size: 1.8rem;
             margin-bottom: 25px;
@@ -166,92 +142,78 @@
             border-radius: 12px;
             padding: 25px;
             transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
+        .card:hover { transform: translateY(-5px); }
         .ai .card:hover { border-color: var(--ai-color); }
         .data .card:hover { border-color: var(--data-color); }
 
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
+        .card h3 { font-size: 1.3rem; margin-bottom: 5px; }
+        .card .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 15px; flex-grow: 1; }
 
-        .card .subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* --- Image Slider System --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
             margin-bottom: 15px;
-            display: block;
+            border: 1px solid #334155;
+            aspect-ratio: 16 / 9;
         }
 
-        .card p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
-
-        /* Badges / Skills */
-        .badges {
+        .slider-wrapper {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+            height: 100%;
         }
 
-        .badge {
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background-color: #334155;
-            color: #e2e8f0;
+        .slider-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
         }
 
-        /* Timeline/Experience for Professional look */
-        .timeline {
-            margin-bottom: 50px;
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(15, 23, 42, 0.7);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            z-index: 10;
         }
 
-        .timeline-item {
-            background-color: var(--card-bg);
-            border-left: 4px solid var(--border-color);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 0 12px 12px 0;
-        }
+        .slider-btn:hover { background-color: var(--ai-color); }
+        .data .slider-btn:hover { background-color: var(--data-color); }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
+        /* Badges */
+        .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .badge { font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; background-color: #334155; color: #e2e8f0; }
+
+        /* Timeline */
+        .timeline { margin-bottom: 50px; }
+        .timeline-item { background-color: var(--card-bg); border-left: 4px solid var(--border-color); padding: 20px; margin-bottom: 20px; border-radius: 0 12px 12px 0; }
         .ai .timeline-item { border-left-color: var(--ai-color); }
         .data .timeline-item { border-left-color: var(--data-color); }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .timeline-header h3 { font-size: 1.25rem; }
+        .timeline-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
         .time-period { color: var(--text-muted); font-size: 0.9rem; }
-
-        .timeline-item ul {
-            margin-left: 20px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-
+        .timeline-item ul { margin-left: 20px; color: #cbd5e1; font-size: 0.95rem; }
         .timeline-item li { margin-bottom: 5px; }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 40px;
-        }
-
+        footer { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 40px; }
         @media (max-width: 768px) {
             header h1 { font-size: 2.2rem; }
             .timeline-header { flex-direction: column; align-items: flex-start; gap: 5px; }
@@ -279,7 +241,6 @@
         </div>
 
         <div id="ai" class="tab-content active ai">
-            
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
@@ -343,14 +304,11 @@
                     <span class="badge" style="background-color: var(--ai-color)">OpenAI API</span>
                     <span class="badge" style="background-color: var(--ai-color)">Docker</span>
                     <span class="badge" style="background-color: var(--ai-color)">Git</span>
-                    <span class="badge" style="background-color: var(--ai-color)">NLP</span>
-                    <span class="badge" style="background-color: var(--ai-color)">Real-time Inference</span>
                 </div>
             </div>
         </div>
 
         <div id="data" class="tab-content data">
-            
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
@@ -361,44 +319,59 @@
                     <ul>
                         <li><b>Marketing Analytics:</b> Built Meta campaign performance dashboards in Power BI to analyze EGP 52K+ ad spend and track 7.2K+ contacts.</li>
                         <li><b>Cost & Region Analysis:</b> Analyzed key metrics (CTR, CPM, CPC) across Egyptian regions to optimize ad performance.</li>
-                        <li><b>Data Schema Design:</b> Participated in designing the data schema for the GearMaster Pro ERP system to ensure clean tracking.</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3>Part-time AI Developer / Analyst <span style="color: var(--data-color)">@ Bitline AI</span></h3>
-                        <span class="time-period">Nov 2024 - Present</span>
-                    </div>
-                    <ul>
-                        <li>Processed video metadata outputs and transformed raw attentiveness scores into functional instructor analytics dashboards.</li>
                     </ul>
                 </div>
             </div>
 
             <h2 class="section-title"><i class="fas fa-project-diagram"></i> Highlighted Projects</h2>
             <div class="grid">
+                
                 <div class="card">
                     <h3>Olist E-Commerce Dashboard</h3>
                     <span class="subtitle">Power BI & Excel</span>
+                    
+                    <div class="slider-container">
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                        <div class="slider-wrapper">
+                            <img src="olist1.png" alt="Olist Part 1">
+                            <img src="olist2.png" alt="Olist Part 2">
+                            <img src="olist3.png" alt="Olist Part 3">
+                        </div>
+                    </div>
+
                     <p>Analyzed a Brazilian dataset covering 112K+ orders and $12.5M+ revenue. Developed map visuals to track delivery performance and delay rates.</p>
                     <div class="badges">
                         <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Data Visualization</span>
                     </div>
                 </div>
+
+                <div class="card">
+                    <h3>Gear Master Ads Analytics</h3>
+                    <span class="subtitle">Power BI & Meta Ads</span>
+                    
+                    <div class="slider-container">
+                        <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)">&#10094;</button>
+                        <button class="slider-btn next-btn" onclick="moveSlider(this, 1)">&#10095;</button>
+                        <div class="slider-wrapper">
+                            <img src="gear1.png" alt="Gear Master Part 1">
+                            <img src="gear2.png" alt="Gear Master Part 2">
+                            <img src="gear3.png" alt="Gear Master Part 3">
+                        </div>
+                    </div>
+
+                    <p>Built Facebook/Meta campaign dashboards to analyze EGP 52K+ ad spend, tracking CTR, CPM, CPC, and 7.2K+ messaging contacts across Egyptian regions.</p>
+                    <div class="badges">
+                        <span class="badge">Marketing Analytics</span><span class="badge">Power BI</span>
+                    </div>
+                </div>
+
                 <div class="card">
                     <h3>Customer Segmentation</h3>
                     <span class="subtitle">R Language</span>
                     <p>Applied K-means clustering algorithm in R to segment customers into actionable groups based on purchasing behaviors for marketing targeting.</p>
                     <div class="badges">
-                        <span class="badge">R</span><span class="badge">K-Means</span><span class="badge">Cluster Analysis</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Churn Predictor App</h3>
-                    <span class="subtitle">Python & ML</span>
-                    <p>Developed a GUI-based machine learning application to forecast subscription churn patterns, helping retention teams save at-risk customers.</p>
-                    <div class="badges">
-                        <span class="badge">Python</span><span class="badge">Predictive Analytics</span><span class="badge">Tkinter</span>
+                        <span class="badge">R</span><span class="badge">K-Means</span>
                     </div>
                 </div>
             </div>
@@ -410,9 +383,6 @@
                     <span class="badge" style="background-color: var(--data-color)">SQL (MS SQL Server, Azure)</span>
                     <span class="badge" style="background-color: var(--data-color)">Python (Pandas, NumPy)</span>
                     <span class="badge" style="background-color: var(--data-color)">R Language</span>
-                    <span class="badge" style="background-color: var(--data-color)">ETL / SSIS</span>
-                    <span class="badge" style="background-color: var(--data-color)">Excel</span>
-                    <span class="badge" style="background-color: var(--data-color)">Data Modeling</span>
                 </div>
             </div>
         </div>
@@ -423,21 +393,39 @@
     </div>
 
     <script>
+        // Tab Handling
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
-
-                // Add active class to clicked button and corresponding content
                 button.classList.add('active');
                 const tabId = button.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+        // Image Slider Handling
+        function moveSlider(button, direction) {
+            const container = button.parentElement;
+            const wrapper = container.querySelector('.slider-wrapper');
+            const images = wrapper.querySelectorAll('img');
+            const imgCount = images.length;
+            
+            // Get current active index or set to 0
+            let currentIndex = parseInt(container.getAttribute('data-index')) || 0;
+            
+            currentIndex += direction;
+            
+            // Loop controls
+            if (currentIndex >= imgCount) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = imgCount - 1;
+            
+            container.setAttribute('data-index', currentIndex);
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
     </script>
 </body>
 </html>
