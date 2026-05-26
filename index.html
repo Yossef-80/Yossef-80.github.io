@@ -10,8 +10,8 @@
     <style>
         :root {
             --bg-color: #0b0f19;
-            --card-bg: rgba(30, 41, 59, 0.4);
-            --card-border: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(30, 41, 59, 0.45);
+            --card-border: rgba(255, 255, 255, 0.06);
             --text-main: #f8fafc;
             --text-muted: #64748b;
             --text-body: #94a3b8;
@@ -19,7 +19,7 @@
             --ai-glow: rgba(59, 130, 246, 0.15);
             --data-color: #10b981;
             --data-glow: rgba(16, 185, 129, 0.15);
-            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -46,7 +46,7 @@
             padding: 60px 24px;
         }
 
-        /* Header Section */
+        /* Header */
         header {
             text-align: center;
             margin-bottom: 60px;
@@ -67,7 +67,6 @@
             color: var(--text-body);
             font-size: 1.15rem;
             margin-bottom: 24px;
-            font-weight: 400;
         }
 
         .social-links {
@@ -88,13 +87,12 @@
             transform: translateY(-3px);
         }
 
-        /* Modern Navigation Tabs */
+        /* Tabs Navigation */
         .tabs-container {
             display: flex;
             justify-content: center;
             margin-bottom: 50px;
-            position: relative;
-            gap: 10px;
+            gap: 12px;
         }
 
         .tab-btn {
@@ -105,39 +103,31 @@
             font-weight: 600;
             padding: 14px 28px;
             cursor: pointer;
-            transition: color 0.3s var(--ease-smooth);
-            border-radius: 8px;
+            transition: all 0.4s var(--ease-smooth);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .tab-btn:hover {
-            color: var(--text-main);
-        }
-
+        .tab-btn:hover { color: var(--text-main); }
         .tab-btn.active[data-tab="ai"] { color: var(--ai-color); background: var(--ai-glow); }
         .tab-btn.active[data-tab="data"] { color: var(--data-color); background: var(--data-glow); }
 
-        .tab-content { display: none; opacity: 0; transform: translateY(15px); }
+        .tab-content { display: none; opacity: 0; transform: translateY(20px); }
         .tab-content.active { 
             display: block; 
             animation: tabReveal 0.6s var(--ease-smooth) forwards;
         }
 
-        @keyframes tabReveal {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes tabReveal { to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
             letter-spacing: -0.02em;
+            margin-top: 20px;
             margin-bottom: 30px;
             display: flex;
             align-items: center;
@@ -145,7 +135,7 @@
             color: var(--text-main);
         }
 
-        /* Grid Layouts & Cards */
+        /* Grid & Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -165,18 +155,15 @@
             flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-6px);
-        }
+        .card:hover { transform: translateY(-6px); }
+        .ai .card:hover { border-color: rgba(59, 130, 246, 0.25); box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08); }
+        .data .card:hover { border-color: rgba(16, 185, 129, 0.25); box-shadow: 0 12px 30px rgba(16, 185, 129, 0.08); }
 
-        .ai .card:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08); }
-        .data .card:hover { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 12px 30px rgba(16, 185, 129, 0.08); }
-
-        .card h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; }
-        .card .subtitle { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; }
+        .card .subtitle { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.05em; }
         .card p { color: var(--text-body); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; line-height: 1.6; }
 
-        /* --- Engineered Premium Image Slider --- */
+        /* Premium Slider UI */
         .slider-container {
             position: relative;
             width: 100%;
@@ -206,31 +193,28 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
             transition: all 0.3s var(--ease-smooth);
             z-index: 10;
             opacity: 0;
         }
 
         .slider-container:hover .slider-btn { opacity: 1; }
-        .slider-btn:hover { background: var(--text-main); color: var(--bg-color); transform: translateY(-50%) scale(1.05); }
-        
+        .slider-btn:hover { background: var(--text-main); color: var(--bg-color); scale: 1.05; }
         .prev-btn { left: 12px; }
         .next-btn { right: 12px; }
 
-        /* Slider Navigation Dots */
         .slider-dots {
             position: absolute;
             bottom: 12px;
@@ -240,38 +224,27 @@
             gap: 6px;
             z-index: 10;
         }
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transition: all 0.3s var(--ease-smooth);
-        }
-        .dot.active {
-            width: 18px;
-            border-radius: 3px;
-            background: #fff;
-        }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transition: all 0.3s var(--ease-smooth); }
+        .dot.active { width: 18px; border-radius: 3px; background: #fff; }
 
-        /* Minimalist Badges */
+        /* Badges */
         .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
-        .badge { font-size: 0.78rem; font-weight: 500; padding: 5px 12px; border-radius: 8px; background: rgba(51, 65, 85, 0.3); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.03); }
+        .badge { font-size: 0.78rem; font-weight: 500; padding: 5px 12px; border-radius: 8px; background: rgba(51, 65, 85, 0.25); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.03); }
 
-        /* Clean Timeline UX */
-        .timeline { margin-bottom: 60px; display: flex; flex-direction: column; gap: 24px; }
-        .timeline-item { background: var(--card-bg); border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; transition: border-color 0.3s; }
-        .timeline-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 16px; gap: 10px; }
-        .time-period { background: rgba(51, 65, 85, 0.4); padding: 4px 12px; border-radius: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 500; }
-        .timeline-item ul { margin-left: 18px; color: var(--text-body); font-size: 0.95rem; }
-        .timeline-item li { margin-bottom: 8px; line-height: 1.6; }
+        /* Timeline Experience */
+        .timeline { margin-bottom: 60px; display: flex; flex-direction: column; gap: 28px; }
+        .timeline-item { background: var(--card-bg); border: 1px solid var(--card-border); padding: 30px; border-radius: 16px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .timeline-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 18px; gap: 10px; }
+        .time-period { background: rgba(51, 65, 85, 0.35); padding: 5px 14px; border-radius: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.02); }
+        .timeline-item ul { margin-left: 20px; color: var(--text-body); font-size: 0.95rem; }
+        .timeline-item li { margin-bottom: 10px; line-height: 1.6; }
         .timeline-item li::marker { color: var(--text-muted); }
 
-        footer { text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: 60px; border-top: 1px solid var(--card-border); padding-top: 30px; }
+        footer { text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: 80px; border-top: 1px solid var(--card-border); padding-top: 30px; }
         
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .timeline-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-            .time-period { align-self: flex-start; }
         }
     </style>
 </head>
@@ -305,7 +278,7 @@
                         <span class="time-period">Jul 2025 - Present</span>
                     </div>
                     <p style="font-size:0.9rem; font-weight:600; margin-bottom:14px; color:var(--text-main); display:flex; align-items:center; gap:6px;">
-                        <i class="fas fa-layer-group" style="color:var(--ai-color)"></i> Featured Production: GearMaster Pro ERP - RBAC System
+                        <i class="fas fa-layer-group" style="color:var(--ai-color)"></i> Core Architecture: GearMaster Pro ERP - RBAC System
                     </p>
                     
                     <div class="slider-container" style="max-width: 640px; margin-bottom:20px;">
@@ -324,8 +297,9 @@
                     </div>
 
                     <ul>
-                        <li>Architected GearMaster Pro ERP (React/Node.js) with a secure Role-Based Access Control (RBAC) and secure API workflows, digitizing workshop operations safely.</li>
-                        <li>Engineered automated ETL pipelines and Node-based Telegram bots, reducing manual data processing by 40%.</li>
+                        <li>Architected GearMaster Pro ERP using React and Node.js, establishing a secure Role-Based Access Control (RBAC) matrix and robust API infrastructure to digitize all automotive center operations.</li>
+                        <li>Engineered automated ETL data pipelines and production-ready Node.js Telegram bots, reducing manual database workloads and administrative overhead by 40%.</li>
+                        <li>Developed responsive Power BI analytical layers focused on operational KPI tracking and predictive inventory forecasting to mitigate resource bottlenecks.</li>
                     </ul>
                 </div>
 
@@ -335,9 +309,10 @@
                         <span class="time-period">Nov 2024 - Present</span>
                     </div>
                     <ul>
-                        <li>Built a real-time Student Attentiveness AI System using YOLOv8, processing live video feeds for engagement analytics.</li>
-                        <li>Developed an Interactive Avatar Web App (React + OpenAI Real-time API + FastAPI) for low-latency voice-to-voice AI.</li>
-                        <li>Optimized parallel inference pipelines, reducing response latency by 35% while maintaining >90% accuracy.</li>
+                        <li>Built and operationalized a real-time Student Attentiveness AI System leveraging custom YOLOv8 pipelines to process live multi-stream video feeds for instant engagement analytics.</li>
+                        <li>Developed an Interactive Avatar Web Application combining React, OpenAI Real-time Voice API, and FastAPI to deliver ultra-low latency, seamless voice-to-voice communication.</li>
+                        <li>Optimized batching and parallel model inference pipelines, successfully decreasing system response latency by 35% while sustaining an inference accuracy threshold of >90%.</li>
+                        <li>Managed end-to-end Machine Learning lifecycles encompassing data preprocessing, automated feature engineering, deployment routing, and systematic accuracy drift monitoring.</li>
                     </ul>
                 </div>
             </div>
@@ -347,43 +322,69 @@
                 
                 <div class="card">
                     <h3>Students Attentiveness AI System</h3>
-                    <span class="subtitle">Python & YOLOv8</span>
+                    <span class="subtitle">Python, YOLOv8 & FastAPI</span>
                     
                     <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 12px; border: 1px dashed rgba(59, 130, 246, 0.2); margin-bottom: 20px;">
                         <p style="font-size: 0.8rem; color: var(--ai-color); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.02em;">
-                            <i class="fas fa-lock"></i> SYSTEM PIPELINE (CONFIDENTIAL DATA)
+                            <i class="fas fa-lock"></i> CONFIDENTIAL SYSTEM PIPELINE
                         </p>
                         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: #cbd5e1; gap: 4px;">
-                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Video Feed</span>
+                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Live Cam Feed</span>
                             <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 0.6rem;"></i>
-                            <span style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 5px 8px; border-radius: 6px; color: var(--ai-color);">YOLOv8</span>
+                            <span style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 5px 8px; border-radius: 6px; color: var(--ai-color);">YOLOv8 Core</span>
                             <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 0.6rem;"></i>
-                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Analytics API</span>
+                            <span style="background: #1e293b; padding: 5px 8px; border-radius: 6px;">Instructor UI</span>
                         </div>
                     </div>
 
-                    <p>Deployed a computer vision model to assess student engagement in real time, detecting confusion patterns from video data to provide instant instructor analytics.</p>
+                    <p>Deployed a computer vision model to assess student engagement in real time, detecting subtle confusion and behavioral patterns from video data to power adaptive teaching analytics dashboards.</p>
                     <div class="badges">
-                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Inference</span>
+                        <span class="badge">Computer Vision</span><span class="badge">YOLOv8</span><span class="badge">Real-time Inference</span>
                     </div>
                 </div>
 
                 <div class="card">
                     <h3>Interactive Avatar Web App</h3>
-                    <span class="subtitle">FastAPI & OpenAI API</span>
-                    <p>Developed a low-latency voice-to-voice web application integrating OpenAI's Real-time APIs with a React frontend web system.</p>
+                    <span class="subtitle">React, FastAPI & OpenAI API</span>
+                    <p>Developed a bleeding-edge, low-latency conversational avatar web interface. Integrated OpenAI's Real-time streaming protocols with a Python backend to handle concurrent, bi-directional audio streams cleanly.</p>
                     <div class="badges">
-                        <span class="badge">FastAPI</span><span class="badge">OpenAI API</span><span class="badge">React</span>
+                        <span class="badge">FastAPI</span><span class="badge">OpenAI API</span><span class="badge">WebSockets</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Subscription Churn Predictor</h3>
+                    <span class="subtitle">Python & Machine Learning</span>
+                    <p>Engineered a standalone GUI application designed to forecast critical subscription churn tendencies, outputting clean predictive features to empower retention teams to proactively resolve at-risk contracts.</p>
+                    <div class="badges">
+                        <span class="badge">Classification</span><span class="badge">Predictive Analytics</span>
                     </div>
                 </div>
 
                 <div class="card">
                     <h3>Stroke Risk Predictor</h3>
-                    <span class="subtitle">Python & Scikit-Learn</span>
-                    <p>Built a classification model to predict stroke risks. Handled high class imbalance using SMOTE techniques to improve minority-class recall.</p>
+                    <span class="subtitle">Scikit-Learn & SMOTE</span>
+                    <p>Built an end-to-end predictive classification model to intercept stroke risk trends. Successfully managed extreme dataset class imbalance via advanced SMOTE sampling to elevate minority-class model recall metrics.</p>
                     <div class="badges">
                         <span class="badge">Machine Learning</span><span class="badge">Scikit-Learn</span>
                     </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-tools" style="color: var(--ai-color)"></i> Technical Skills (AI & Software)</h2>
+            <div class="card" style="margin-bottom: 40px;">
+                <div class="badges">
+                    <span class="badge" style="background: var(--ai-glow); color: var(--ai-color); border-color: rgba(59, 130, 246, 0.2);">Python</span>
+                    <span class="badge">SQL</span>
+                    <span class="badge">JavaScript (Node.js/React)</span>
+                    <span class="badge">Scikit-learn</span>
+                    <span class="badge">YOLOv8</span>
+                    <span class="badge">FastAPI</span>
+                    <span class="badge">OpenAI API</span>
+                    <span class="badge">Docker</span>
+                    <span class="badge">ETL Pipelines</span>
+                    <span class="badge">Real-time Inference</span>
+                    <span class="badge">Git</span>
                 </div>
             </div>
         </div>
@@ -391,14 +392,17 @@
         <div id="data" class="tab-content data">
             <h2 class="section-title"><i class="fas fa-briefcase" style="color: var(--data-color)"></i> Experience</h2>
             <div class="timeline">
+                
                 <div class="timeline-item">
                     <div class="timeline-header">
                         <h3>Data Analyst <span style="color: var(--data-color)">@ Gear Master</span></h3>
                         <span class="time-period">Jul 2025 - Present</span>
                     </div>
                     <ul>
-                        <li><b>Marketing Analytics:</b> Built Meta campaign performance dashboards in Power BI to analyze EGP 52K+ ad spend and track 7.2K+ contacts.</li>
-                        <li><b>Cost & Region Analysis:</b> Analyzed key metrics (CTR, CPM, CPC) across Egyptian regions to optimize ad performance.</li>
+                        <li><b>Marketing Analytics & Cost Optimization:</b> Engineered comprehensive Meta Ads campaign dashboards in Power BI, tracking over EGP 52K in ad spend, capturing 7.2K+ organic messaging contacts, and optimizing CTR, CPM, and CPC metrics across diverse geographical Egyptian zones.</li>
+                        <li><b>Data Schema Design:</b> Co-designed and structured core relational database schemas for the proprietary GearMaster Pro ERP ecosystem, ensuring high transactional integrity and standardized historical logging for workshop bookings and volatile parts pricing.</li>
+                        <li><b>Automation Engineering:</b> Authored robust Python automation routines interacting with external platform webhooks to sync operational transactional data and trigger instantaneous price shift logs.</li>
+                        <li><b>Operational Reporting:</b> Maintained and distributed recurring management intelligence reports visualizing regional automotive brand demand curves and service point execution performance indexes.</li>
                     </ul>
                 </div>
             </div>
@@ -407,8 +411,8 @@
             <div class="grid">
                 
                 <div class="card">
-                    <h3>Olist E-Commerce Dashboard</h3>
-                    <span class="subtitle">Power BI & Excel</span>
+                    <h3>Olist E-Commerce Ecosystem Dashboard</h3>
+                    <span class="subtitle">Power BI, DAX & Excel</span>
                     
                     <div class="slider-container">
                         <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)"><i class="fas fa-chevron-left"></i></button>
@@ -425,15 +429,15 @@
                         </div>
                     </div>
 
-                    <p>Analyzed a Brazilian dataset covering 112K+ orders and $12.5M+ revenue. Developed map visuals to track delivery performance and delay rates.</p>
+                    <p>Processed and modeled a multi-table Brazilian marketplace dataset containing 112K+ granular orders and $12.5M+ total revenue. Designed advanced DAX measures to highlight logistics fulfillment delay rates and regional shipping costs.</p>
                     <div class="badges">
-                        <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Data Modeling</span>
+                        <span class="badge">Power BI</span><span class="badge">DAX Modeling</span><span class="badge">Geospatial Analysis</span>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3>Gear Master Ads Analytics</h3>
-                    <span class="subtitle">Power BI & Meta Ads</span>
+                    <h3>Gear Master Performance Ads Control</h3>
+                    <span class="subtitle">Power BI & Meta Ads API</span>
                     
                     <div class="slider-container">
                         <button class="slider-btn prev-btn" onclick="moveSlider(this, -1)"><i class="fas fa-chevron-left"></i></button>
@@ -450,30 +454,44 @@
                         </div>
                     </div>
 
-                    <p>Built Facebook/Meta campaign dashboards to analyze EGP 52K+ ad spend, tracking CTR, CPM, CPC, and 7.2K+ messaging contacts across Egyptian regions.</p>
+                    <p>Designed a live-connected marketing dashboard tracking EGP 52K+ digital ad distribution. Configured automated visual alert indicators for anomalies in cross-platform CPC and target lead acquisition cost benchmarks.</p>
                     <div class="badges">
-                        <span class="badge">Marketing Analytics</span><span class="badge">Power BI</span>
+                        <span class="badge">Marketing Analytics</span><span class="badge">Power BI</span><span class="badge">Ad-Spend ROI</span>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3>Customer Segmentation</h3>
-                    <span class="subtitle">R Language</span>
-                    <p>Applied K-means clustering algorithm in R to segment customers into actionable groups based on purchasing behaviors for marketing targeting.</p>
+                    <h3>Behavioral Customer Segmentation</h3>
+                    <span class="subtitle">R Programming Language</span>
+                    <p>Implemented unsupervised K-means clustering pipelines within R environments to group client entities according to transactional volume and frequency parameters, building data-backed profiles for focused targeted advertising.</p>
                     <div class="badges">
-                        <span class="badge">R</span><span class="badge">K-Means</span>
+                        <span class="badge">R Studio</span><span class="badge">K-Means</span><span class="badge">Cluster Analysis</span>
                     </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-tools" style="color: var(--data-color)"></i> Technical Skills (Data Analytics)</h2>
+            <div class="card" style="margin-bottom: 40px;">
+                <div class="badges">
+                    <span class="badge" style="background: var(--data-glow); color: var(--data-color); border-color: rgba(16, 185, 129, 0.2);">Power BI (DAX & Power Query)</span>
+                    <span class="badge">SQL (MS SQL Server, Azure SQL)</span>
+                    <span class="badge">SSIS / SSRS</span>
+                    <span class="badge">Python (Pandas, NumPy)</span>
+                    <span class="badge">R Language</span>
+                    <span class="badge">Data Modeling & Schema Design</span>
+                    <span class="badge">Tableau</span>
+                    <span class="badge">Excel Analytics</span>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 Youssef Muhammed. Fabricated with precision via GitHub Pages.</p>
+            <p>&copy; 2026 Youssef Muhammed. Engineered with absolute data precision via GitHub Pages.</p>
         </footer>
     </div>
 
     <script>
-        // Smooth State-Driven Tabs
+        // Smooth State-Driven Tabs switching
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -490,7 +508,7 @@
             });
         });
 
-        // Precision Slider Engine with Dots Support
+        // Precision Slider Engine with Active Dots Support
         function moveSlider(button, direction) {
             const container = button.parentElement;
             const wrapper = container.querySelector('.slider-wrapper');
@@ -507,7 +525,7 @@
             container.setAttribute('data-index', currentIndex);
             wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
             
-            // Sync UI Dots Indicators
+            // Sync UI Indicators Dots
             if(dots.length > 0) {
                 dots.forEach(dot => dot.classList.remove('active'));
                 dots[currentIndex].classList.add('active');
